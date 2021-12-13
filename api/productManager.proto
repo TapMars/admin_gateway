@@ -1,0 +1,192 @@
+syntax = "proto3";
+option go_package = "pkg/proto";
+package productManager;
+
+import "google/protobuf/timestamp.proto";
+import "google/type/dayofweek.proto";
+import "google/type/latlng.proto";
+import "google/type/timeofday.proto";
+
+/*
+Proto3 default values
+For strings, the default value is the empty string.
+For bytes, the default value is empty bytes.
+For booleans, the default value is false.
+For numeric types, the default value is zero.
+For enums, the default value is the first defined enum value, which must be 0.
+For message fields, the field is not set.
+For repeated, the array is empty
+*/
+
+service ProductManager {
+  rpc GetItem(GetItemRequest) returns (GetItemResponse) {}
+  rpc AddItem(AddItemRequest) returns (AddItemResponse) {}
+  rpc DeleteItem(DeleteItemRequest) returns (DeleteItemResponse) {}
+  rpc SearchBusinessItems(SearchBusinessItemsRequest) returns (SearchBusinessItemsResponse) {}
+
+  rpc GetBusiness(GetBusinessRequest) returns (GetBusinessResponse) {}
+  rpc AddBusiness(AddBusinessRequest) returns (AddBusinessResponse) {}
+  rpc UpdateBusiness(UpdateBusinessRequest) returns (UpdateBusinessResponse) {}
+  rpc DeleteBusiness(DeleteBusinessRequest) returns (DeleteBusinessResponse) {}
+  rpc SearchBusinesses(SearchBusinessesRequest) returns (SearchBusinessesResponse) {}
+}
+
+message GetItemRequest {
+  string id = 1;
+}
+
+message GetItemResponse {
+  Item item = 1;
+}
+
+message AddItemRequest {
+  Item item = 1;
+}
+
+message AddItemResponse {
+  string id = 1;
+}
+
+message DeleteItemRequest {
+  string id = 1;
+}
+
+message DeleteItemResponse {
+}
+
+message SearchBusinessItemsRequest {
+  string businessId = 1;
+  google.type.DayOfWeek dayOfWeek = 2;
+}
+
+message SearchBusinessItemsResponse {
+  repeated Item items = 1;
+}
+
+message GetBusinessRequest {
+  string id = 1;
+}
+
+message GetBusinessResponse {
+  Business business = 1;
+}
+
+message AddBusinessRequest {
+ // string ownerId = 1;
+  Business business = 1;
+}
+
+message AddBusinessResponse {
+  string id = 1;
+}
+
+message UpdateBusinessRequest {
+  Business business = 1;
+}
+
+message UpdateBusinessResponse {
+}
+
+message DeleteBusinessRequest {
+  string id = 1;
+}
+
+message DeleteBusinessResponse {
+  int32 itemsDeleted = 1;
+}
+
+message SearchBusinessesRequest {
+  string name = 1;
+  google.type.LatLng latLng = 2;
+  FilterDistance filterDistance = 3;
+  OrderBy orderBy = 4;
+}
+
+message SearchBusinessesResponse {
+  repeated Business businesses = 1;
+}
+
+message Item {
+  string id = 1;
+  string name = 2;
+  int32 favorites = 3;
+  HappyHourPeriod happyHourPeriod = 4;
+  ItemDetails details = 5;
+  BusinessReference businessReference = 6;
+  google.protobuf.Timestamp created = 7;
+  google.protobuf.Timestamp updated = 8;
+  google.type.LatLng latLng = 9;
+}
+
+message ItemDetails {
+  string description = 2;
+  bool isDrink = 3;
+  bool isFood = 4;
+  bool isOther = 5;
+}
+
+message BusinessReference {
+  string businessId = 1;
+  string businessName = 2;
+  //string placeId = 3;
+
+}
+
+message Business {
+  string id = 1;
+  string name = 2;
+  int32 favorites = 3;
+  //OpeningHours openingHours = 4;
+  Address address = 5;
+  google.protobuf.Timestamp created = 6;
+  google.protobuf.Timestamp updated = 7;
+  //string placeId = 8;
+  google.type.LatLng latLng = 9;
+}
+
+message OpeningHours {
+  bool open_now = 1;
+  repeated OpeningHoursPeriod monday = 2;
+  repeated OpeningHoursPeriod tuesday = 3;
+  repeated OpeningHoursPeriod wednesday = 4;
+  repeated OpeningHoursPeriod thursday = 5;
+  repeated OpeningHoursPeriod friday = 6;
+  repeated OpeningHoursPeriod saturday = 7;
+  repeated OpeningHoursPeriod sunday = 8;
+}
+
+message OpeningHoursPeriod {
+  string hours_text = 1;
+  google.type.TimeOfDay open = 2;
+  google.type.TimeOfDay close = 3;
+}
+
+message HappyHourPeriod {
+  string hours_text = 1;
+  google.type.DayOfWeek dayOfWeek = 2;
+  google.type.TimeOfDay start = 3;
+  google.type.TimeOfDay end = 4;
+  bool bleeds = 5;
+}
+
+message Address {
+  string region_code = 1; //US for now
+  repeated string lines = 2;
+  string city = 3;
+  string state = 4;
+  string zip = 5;
+}
+
+enum FilterDistance {
+  None = 0;
+  One = 1;
+  Five = 2;
+  Twenty = 3;
+}
+
+enum OrderBy {
+  NameRelevance = 0;
+  Favorites = 1;
+  Updated = 2;
+  Created= 3;
+}
