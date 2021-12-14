@@ -1,43 +1,73 @@
 package main
 
 import (
-	"TapMars/productManager/pkg/config"
-	"TapMars/productManager/pkg/productManager"
-	pb "TapMars/productManager/pkg/proto"
-	"context"
-	"google.golang.org/grpc"
+	"fmt"
+	"github.com/gorilla/mux"
 	"log"
-	"net"
+	"net/http"
+	"os"
 )
 
-//Failing to connect to Firestore is the integration test
 func main() {
-	log.Printf("starting server...")
+	router := mux.NewRouter()
+	businessesRouter := router.PathPrefix("/businesses").Subrouter()
+	itemsRouter := businessesRouter.PathPrefix("/{id}/items").Subrouter()
 
-	ctx := context.Background()
+	businessesRouter.Methods(http.MethodGet).Path("/{id}").HandlerFunc(getBusiness)
+	businessesRouter.Methods(http.MethodPost).Path("").HandlerFunc(createBusiness)
+	businessesRouter.Methods(http.MethodPut).Path("/{id}").HandlerFunc(updateBusiness)
+	businessesRouter.Methods(http.MethodDelete).Path("/{id}").HandlerFunc(deleteBusiness)
+	businessesRouter.Methods(http.MethodGet).Path("").HandlerFunc(searchBusinesses).
+		Queries("filterDistance", "{filter-distance}", "orderBy", "{order-by}")
 
-	port, projectID, err := config.GetEnvironmentVariables()
-	if err != nil {
-		log.Fatalf("failed to config: %v", err)
+	itemsRouter.Methods(http.MethodGet).Path("/{id}").HandlerFunc(getItem)
+	itemsRouter.Methods(http.MethodPost).Path("").HandlerFunc(createItem)
+	itemsRouter.Methods(http.MethodDelete).Path("/{id}").HandlerFunc(deleteItem)
+	itemsRouter.Methods(http.MethodGet).Path("").HandlerFunc(searchItems).
+		Queries("dayOfWeek", "{day-of-week}")
+
+	//port, host, err := config.GetEnvironmentVariables()
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatalf("Failed to find Port: %s", port)
 	}
-	log.Printf("Port: %s", port)
-	log.Printf("ProjectID: %s", projectID)
 
-	lis, err := net.Listen("tcp", ":"+port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
+	log.Fatal(http.ListenAndServe(":"+port, router))
 
-	srv, err := productManager.NewServer(ctx, projectID)
-	if err != nil {
-		log.Fatalf("Firestore Startup Server Error: %v", err)
-	}
-	log.Printf("New productManager Server")
+}
 
-	s := grpc.NewServer()
+func getBusiness(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
 
-	pb.RegisterProductManagerServer(s, srv)
-	if err = s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
+func createBusiness(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func updateBusiness(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func deleteBusiness(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func searchBusinesses(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func getItem(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func createItem(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func deleteItem(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
+}
+
+func searchItems(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Not implemented")
 }
