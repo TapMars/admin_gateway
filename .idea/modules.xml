@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/productManager_proxy.iml" filepath="$PROJECT_DIR$/.idea/productManager_proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/admin_proxy.iml" filepath="$PROJECT_DIR$/.idea/admin_proxy.iml" />
     </modules>
   </component>
 </project>

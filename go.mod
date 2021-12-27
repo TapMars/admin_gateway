@@ -1,4 +1,4 @@
-module TapMars/productManager_proxy
+module TapMars/admin_proxy
 
 go 1.17
 

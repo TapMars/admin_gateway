@@ -1,8 +1,10 @@
 package main
 
 import (
+	"TapMars/admin_proxy/pkg/productManager"
 	"fmt"
 	"github.com/gorilla/mux"
+	"google.golang.org/grpc"
 	"log"
 	"net/http"
 	"os"
@@ -10,21 +12,20 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	businessesRouter := router.PathPrefix("/businesses").Subrouter()
-	itemsRouter := businessesRouter.PathPrefix("/{id}/items").Subrouter()
+	router.Methods(http.MethodGet).Path("/health").HandlerFunc(healthCheck)
 
-	businessesRouter.Methods(http.MethodGet).Path("/{id}").HandlerFunc(getBusiness)
-	businessesRouter.Methods(http.MethodPost).Path("").HandlerFunc(createBusiness)
-	businessesRouter.Methods(http.MethodPut).Path("/{id}").HandlerFunc(updateBusiness)
-	businessesRouter.Methods(http.MethodDelete).Path("/{id}").HandlerFunc(deleteBusiness)
-	businessesRouter.Methods(http.MethodGet).Path("").HandlerFunc(searchBusinesses).
-		Queries("filterDistance", "{filter-distance}", "orderBy", "{order-by}")
+	var addr *string
+	var opts []grpc.DialOption
 
-	itemsRouter.Methods(http.MethodGet).Path("/{id}").HandlerFunc(getItem)
-	itemsRouter.Methods(http.MethodPost).Path("").HandlerFunc(createItem)
-	itemsRouter.Methods(http.MethodDelete).Path("/{id}").HandlerFunc(deleteItem)
-	itemsRouter.Methods(http.MethodGet).Path("").HandlerFunc(searchItems).
-		Queries("dayOfWeek", "{day-of-week}")
+	//Create a sub-router for every connected service
+	productManagerRouter := router.PathPrefix("/product-manager").Subrouter()
+
+	pm, err := productManager.NewProductManager(addr, opts)
+	if err != nil {
+		log.Fatalf("Product Manager connection: %v", err)
+	}
+	defer pm.Close()
+	pm.RegisterHandlers(productManagerRouter)
 
 	//port, host, err := config.GetEnvironmentVariables()
 	port := os.Getenv("PORT")
@@ -36,38 +37,6 @@ func main() {
 
 }
 
-func getBusiness(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func createBusiness(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func updateBusiness(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func deleteBusiness(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func searchBusinesses(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func getItem(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func createItem(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func deleteItem(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
-}
-
-func searchItems(w http.ResponseWriter, r *http.Request) {
+func healthCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Not implemented")
 }
