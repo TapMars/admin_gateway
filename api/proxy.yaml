@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Product Manager Proxy
+  description: Is a productManager server to be the REST endpoint for WEB to access the Product Manager service via gRPC
+  version: 1.0.0
+servers:
+  - url: https://dev.product-manager-proxy.tapmars.com
+    description: Development Server
+    variables:
+      port:
+        default: '4011'
+  - url: hhtps://product-manager-proxy.tapmars.com
+    description: Production Server
+    variables:
+      port:
+        default: '4011'
+paths:
+  /health:
+    get:
+      summary: Health check on productManager
+      responses:
+        '200':
+          description: Returns a status OK if reachable and the state of its gRPC connection
+          content:
+            application/json:
+              schema:
+                properties:
+                  state:
+                    type: string
+  /businesses:
+    get:
+      summary: Returns a list of businesses
+      parameters:
+        - $ref: '#/components/parameters/nameParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/latitudeParam'
+        - $ref: '#/components/parameters/longitudeParam'
+        - $ref: '#/components/parameters/filterDistanceParam'
+      responses:
+        '200':
+          description: A list of businesses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/business'
+    post:
+      summary: Returns a list of businesses
+      parameters:
+        - $ref: '#/components/parameters/nameParam'
+      responses:
+        '200':
+          description: Returns the id of the new business
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+
+  #/businesses/{id}
+
+#HTTP GET     api.tapmars.com/businesses/{id}   //Get business
+#HTTP POST    api.tapmars.com/businesses        //Create business
+#HTTP PUT     api.tapmars.com/businesses/{id}   //Update business
+#HTTP DELETE  api.tapmars.com/businesses/{id}   //Delete business
+#HTTP GET     api.tapmars.com/businesses        //Search businesses, default distance and order
+#HTTP GET     api.tapmars.com/businesses?filter-distance=five&order-by=name   //Search businesses where filter distance is 5 miles and order by name
+
+#HTTP GET     api.tapmars.com/businesses/{id}/items{id}   //Get item
+#HTTP POST    api.tapmars.com/businesses/{id}/items       //Create item
+#HTTP DELETE  api.tapmars.com/businesses/{id}/items{id}   //Delete item
+#HTTP GET     api.tapmars.com/businesses/{id}/items       //Search business Items, default all items
+#HTTP GET     api.tapmars.com/businesses/{id}/items?day-of-week=tuesday  //Search business items where day-of-week is Tuesday
+  
+components:
+  schemas:
+    health:
+      type: object
+    business:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        favorites:
+          type: integer
+          format: int32
+        address:
+          $ref: '#/components/schemas/address'
+        created:
+          $ref: '#/components/schemas/timeStamp'
+        updated:
+          $ref: '#/components/schemas/timeStamp'
+        latLng:
+          $ref: '#/components/schemas/latLng'
+    address:
+      type: object
+      properties:
+        region_code:
+          type: string
+        lines:
+          type: array
+          items:
+            type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+    timeStamp:
+      type: object
+      properties:
+        seconds:
+          type: integer
+          format: int64
+        nanos:
+          type: integer
+          format: int32
+    latLng:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+  parameters:
+    nameParam:
+      name: name
+      in: query
+      description: name or partial of the business
+      required: false
+      schema:
+        type: string
+        default: ""
+    sortParam:
+      name: sort
+      in: query
+      description: sort businesses by 0->Name, 1->Favorites, 2->Updated, 3->Created
+      required: false
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 0
+    latitudeParam:
+      name: latitude
+      in: query
+      description: latitude
+      required: false
+      schema:
+        type: number
+        default: 0.0
+    longitudeParam:
+      name: longitude
+      in: query
+      description: longitude
+      required: false
+      schema:
+        type: number
+        default: 0.0
+    filterDistanceParam:
+      name: filter-distance
+      in: query
+      description: filter distance by miles 0->None, 1->One, 2->Five, 3-> Twenty
+      required: false
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 0

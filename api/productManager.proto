@@ -19,91 +19,39 @@ For repeated, the array is empty
 */
 
 service ProductManager {
-  rpc GetItem(GetItemRequest) returns (GetItemResponse) {}
-  rpc AddItem(AddItemRequest) returns (AddItemResponse) {}
-  rpc DeleteItem(DeleteItemRequest) returns (DeleteItemResponse) {}
-  rpc SearchBusinessItems(SearchBusinessItemsRequest) returns (SearchBusinessItemsResponse) {}
+  rpc GetItem(Id) returns (Item) {}
+  rpc CreateItem(ItemProfile) returns (Id) {}
+  rpc DeleteItem(Id) returns (EmptyResponse) {}
+  rpc QueryBusinessItems(BusinessItemsQuery) returns (stream Item) {}
 
-  rpc GetBusiness(GetBusinessRequest) returns (GetBusinessResponse) {}
-  rpc AddBusiness(AddBusinessRequest) returns (AddBusinessResponse) {}
-  rpc UpdateBusiness(UpdateBusinessRequest) returns (UpdateBusinessResponse) {}
-  rpc DeleteBusiness(DeleteBusinessRequest) returns (DeleteBusinessResponse) {}
-  rpc SearchBusinesses(SearchBusinessesRequest) returns (SearchBusinessesResponse) {}
+  rpc GetBusiness(Id) returns (Business) {}
+  rpc CreateBusiness(BusinessProfile) returns (Id) {}
+  rpc UpdateBusiness(BusinessProfile) returns (ItemsAffected) {}
+  rpc DeleteBusiness(Id) returns (ItemsAffected) {}
+  rpc QueryBusinesses(BusinessesQuery) returns (stream Business) {}
 }
 
-message GetItemRequest {
+message EmptyResponse {
+}
+
+message Id {
   string id = 1;
 }
 
-message GetItemResponse {
-  Item item = 1;
+message ItemsAffected {
+  int32 count = 1;
 }
 
-message AddItemRequest {
-  Item item = 1;
-}
-
-message AddItemResponse {
-  string id = 1;
-}
-
-message DeleteItemRequest {
-  string id = 1;
-}
-
-message DeleteItemResponse {
-}
-
-message SearchBusinessItemsRequest {
+message BusinessItemsQuery {
   string businessId = 1;
   google.type.DayOfWeek dayOfWeek = 2;
 }
 
-message SearchBusinessItemsResponse {
-  repeated Item items = 1;
-}
-
-message GetBusinessRequest {
-  string id = 1;
-}
-
-message GetBusinessResponse {
-  Business business = 1;
-}
-
-message AddBusinessRequest {
- // string ownerId = 1;
-  Business business = 1;
-}
-
-message AddBusinessResponse {
-  string id = 1;
-}
-
-message UpdateBusinessRequest {
-  Business business = 1;
-}
-
-message UpdateBusinessResponse {
-}
-
-message DeleteBusinessRequest {
-  string id = 1;
-}
-
-message DeleteBusinessResponse {
-  int32 itemsDeleted = 1;
-}
-
-message SearchBusinessesRequest {
+message BusinessesQuery {
   string name = 1;
   google.type.LatLng latLng = 2;
   FilterDistance filterDistance = 3;
-  OrderBy orderBy = 4;
-}
-
-message SearchBusinessesResponse {
-  repeated Business businesses = 1;
+  Sort sort = 4;
 }
 
 message Item {
@@ -118,47 +66,16 @@ message Item {
   google.type.LatLng latLng = 9;
 }
 
-message ItemDetails {
-  string description = 2;
-  bool isDrink = 3;
-  bool isFood = 4;
-  bool isOther = 5;
+message ItemProfile {
+  string businessId = 1;
+  string name = 2;
+  HappyHourPeriod happyHourPeriod = 3;
+  ItemDetails details = 4;
 }
 
 message BusinessReference {
   string businessId = 1;
   string businessName = 2;
-  //string placeId = 3;
-
-}
-
-message Business {
-  string id = 1;
-  string name = 2;
-  int32 favorites = 3;
-  //OpeningHours openingHours = 4;
-  Address address = 5;
-  google.protobuf.Timestamp created = 6;
-  google.protobuf.Timestamp updated = 7;
-  //string placeId = 8;
-  google.type.LatLng latLng = 9;
-}
-
-message OpeningHours {
-  bool open_now = 1;
-  repeated OpeningHoursPeriod monday = 2;
-  repeated OpeningHoursPeriod tuesday = 3;
-  repeated OpeningHoursPeriod wednesday = 4;
-  repeated OpeningHoursPeriod thursday = 5;
-  repeated OpeningHoursPeriod friday = 6;
-  repeated OpeningHoursPeriod saturday = 7;
-  repeated OpeningHoursPeriod sunday = 8;
-}
-
-message OpeningHoursPeriod {
-  string hours_text = 1;
-  google.type.TimeOfDay open = 2;
-  google.type.TimeOfDay close = 3;
 }
 
 message HappyHourPeriod {
@@ -167,6 +84,30 @@ message HappyHourPeriod {
   google.type.TimeOfDay start = 3;
   google.type.TimeOfDay end = 4;
   bool bleeds = 5;
+}
+
+message ItemDetails {
+  string description = 2;
+  bool isDrink = 3;
+  bool isFood = 4;
+  bool isOther = 5;
+}
+
+message Business {
+  string id = 1;
+  string name = 2;
+  int32 favorites = 3;
+  Address address = 4;
+  google.protobuf.Timestamp created = 5;
+  google.protobuf.Timestamp updated = 6;
+  google.type.LatLng latLng = 7;
+}
+
+message BusinessProfile {
+  string id = 1;
+  string name = 2;
+  Address address = 3;
+  google.type.LatLng latLng = 4;
 }
 
 message Address {
@@ -184,9 +125,26 @@ enum FilterDistance {
   Twenty = 3;
 }
 
-enum OrderBy {
+enum Sort {
   NameRelevance = 0;
   Favorites = 1;
   Updated = 2;
   Created= 3;
+}
+
+message OpeningHours {
+  bool open_now = 1;
+  repeated OpeningHoursPeriod monday = 2;
+  repeated OpeningHoursPeriod tuesday = 3;
+  repeated OpeningHoursPeriod wednesday = 4;
+  repeated OpeningHoursPeriod thursday = 5;
+  repeated OpeningHoursPeriod friday = 6;
+  repeated OpeningHoursPeriod saturday = 7;
+  repeated OpeningHoursPeriod sunday = 8;
+}
+
+message OpeningHoursPeriod {
+  string hours_text = 1;
+  google.type.TimeOfDay open = 2;
+  google.type.TimeOfDay close = 3;
 }

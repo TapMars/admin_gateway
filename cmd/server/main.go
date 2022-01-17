@@ -1,33 +1,51 @@
 package main
 
 import (
-	"TapMars/admin_proxy/pkg/productManager"
-	"fmt"
-	"github.com/gorilla/mux"
+	pm "TapMars/admin_gateway/pkg/productManager"
+	"context"
+	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"time"
 )
 
 func main() {
-	router := mux.NewRouter()
-	router.Methods(http.MethodGet).Path("/health").HandlerFunc(healthCheck)
+	ctx := context.Background()
 
-	var addr *string
-	var opts []grpc.DialOption
-
-	//Create a sub-router for every connected service
-	productManagerRouter := router.PathPrefix("/product-manager").Subrouter()
-
-	pm, err := productManager.NewProductManager(addr, opts)
+	var addr string
+	//var opts []grpc.DialOption
+	var timeout time.Duration
+	gin.SetMode(gin.ReleaseMode)
+	timeoutSec := os.Getenv("TIMEOUT_SEC")
+	if timeoutSec == "" {
+		timeout = time.Second * 10
+	} else {
+		sec, err := strconv.Atoi(timeoutSec)
+		if err != nil {
+			log.Fatalf("Parsing TIMEOUT_SEC: %v", err)
+		}
+		timeout = time.Second * time.Duration(sec)
+	}
+	pmConn, err := grpc.DialContext(ctx, addr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Product Manager connection: %v", err)
 	}
-	defer pm.Close()
-	pm.RegisterHandlers(productManagerRouter)
+	pmProxy := pm.NewProductManager(pmConn)
+	defer func(pm *pm.ProductManager) {
+		err := pm.Close()
+		if err != nil {
+			log.Fatalf("Closing Proxy: %v", err)
+		}
+	}(pmProxy)
 
-	//port, host, err := config.GetEnvironmentVariables()
+	router := gin.Default()
+	router.Use(pm.RequestTimeoutWrapper(timeout))
+	pmRouter := router.Group("/product-manager")
+	pmProxy.AddRoutes(pmRouter)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatalf("Failed to find Port: %s", port)
@@ -35,8 +53,4 @@ func main() {
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 
-}
-
-func healthCheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Not implemented")
 }

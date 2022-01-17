@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #Assuming that the script is being called in respective directory
-ORGANIZATION_ROOT_PATH="/Users/nmarler/go/src/TapMars"
+ORGANIZATION_ROOT_PATH="/Users/nicky/go/src/TapMars"
 PROTO_PKG_SOURCE="./productManager/pkg/proto"
-PROTO_PKG_DESTINATION="./productManager_proxy/pkg/"
+PROTO_PKG_DESTINATION="./admin_gateway/pkg/productManager"
 
 cd $ORGANIZATION_ROOT_PATH
 

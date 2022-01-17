@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2e69451e-ad73-4bb6-a088-f9756d0ab49e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/proxy.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloudbuild.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/server/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/helpers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/productManager_test/helpers_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/productManager_test/productManager_suite_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/productManager_test/productManager_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/proto/productManager.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/productManager/proto/productManager_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/admin_proxy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/admin_gateway.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/productManager_proxy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/productManager.proto" beforeDir="false" afterPath="$PROJECT_DIR$/api/productManager.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/productManager_proxy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/config/config_test/config_suite_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/config_test/config_suite_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/config/config_test/config_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/config_test/config_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/productManager/productManager.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/productManager/productManager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/proto/copyFromSource.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tools/proto/copyFromSource.sh" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="54209493-f28e-4b82-a297-e152409b863e" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23XDApak1dZVWOFliMSDXMe1SLm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="nicky@tapmars.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="happyhour-dev-117" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="HappyHour-Dev" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="121512486702" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.google.cloudcode.ide_session_index" value="20220113_0003" />
+    <property name="configurable..is.expanded" value="true" />
+    <property name="configurable.GoLibrariesConfigurable.is.expanded" value="true" />
+    <property name="go.format.on.save.advertiser.fired" value="true" />
+    <property name="go.formatter.settings.were.checked" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/private/service_account" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.go test TapMars/admin_gateway/pkg/productManager/productManager_test">
+    <configuration name="admin-gateway" type="CloudCodeCloudRunConfigurationType" factoryName="CloudCodeCloudRunDevelopConfigurationFactory" show_console_on_std_err="false" show_console_on_std_out="false" imageBuilder="{&quot;name&quot;:&quot;Buildpacks&quot;,&quot;payload&quot;:{&quot;path&quot;:&quot;go.mod&quot;,&quot;builder&quot;:&quot;gcr.io/buildpacks/builder:v1&quot;}}">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="buildpacksEnv" />
+      <option name="cloudSqlConnections">
+        <list />
+      </option>
+      <option name="cpuAllocated" value="NO_LIMIT" />
+      <option name="dockerBuildArgs" />
+      <option name="dockerTarget" value="" />
+      <option name="environmentVariables" />
+      <option name="loadingAvailableBuilders" value="false" />
+      <option name="mappings">
+        <list />
+      </option>
+      <option name="memoryAllocated" value="MIB_256" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <option name="serviceAccount" value="admin-gateway@happyhour-dev-117.iam.gserviceaccount.com" />
+      <option name="serviceName" value="admin-gateway" />
+      <option name="skaffoldWatchMode" value="ON_DEMAND" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestProductManagerTest in TapMars/admin_gateway/pkg/productManager/productManager_test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="admin_gateway" />
+      <working_directory value="$PROJECT_DIR$/pkg/productManager/productManager_test" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="TapMars/admin_gateway/pkg/productManager/productManager_test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestProductManagerTest\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test TapMars/admin_gateway/pkg/productManager/productManager_test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="admin_gateway" />
+      <working_directory value="$PROJECT_DIR$/pkg/productManager/productManager_test" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="TapMars/admin_gateway/pkg/productManager/productManager_test" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Cloud Code: Cloud Run.admin-gateway" />
+      <item itemvalue="Go Test.go test TapMars/admin_gateway/pkg/productManager/productManager_test" />
+      <item itemvalue="Go Test.TestProductManagerTest in TapMars/admin_gateway/pkg/productManager/productManager_test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.go test TapMars/admin_gateway/pkg/productManager/productManager_test" />
+        <item itemvalue="Go Test.TestProductManagerTest in TapMars/admin_gateway/pkg/productManager/productManager_test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager_test/productManager_test.go</url>
+          <line>61</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager_test/productManager_test.go</url>
+          <line>67</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager_test/productManager_test.go</url>
+          <line>62</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager.go</url>
+          <line>67</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/helpers.go</url>
+          <line>137</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager.go</url>
+          <line>72</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/productManager/productManager.go</url>
+          <line>73</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

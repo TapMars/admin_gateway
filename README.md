@@ -1,11 +1,8 @@
-# productManager_proxy
-A REST service to act as the GRPC proxy to ProductManager
-
-#Product Manager Proxy
+#Admin Gateway Proxy
 
 ## Overview
 
-Product Manager Proxy is a backend REST service to act as the GRPC proxy to ProductManager
+Product Manager Proxy is a backend REST service to act as the GRPC gateway to Admin services
 
 The application is in GoLang and uses REST to communicate with Web and gRPC to communicate with Product Manager.
 It is deployed to Cloud Run which manages containerized applications.

@@ -1,8 +1,8 @@
 package config_test
 
 import (
-	"TapMars/productManager/pkg/config"
-	. "github.com/onsi/ginkgo/v2"
+	"TapMars/admin_gateway/pkg/config"
+	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"os"
 )
@@ -11,16 +11,16 @@ var _ = Describe("Config", func() {
 	Describe("Get Environment Variables", func() {
 		BeforeEach(func() {
 			_ = os.Setenv("PORT", "")
-			_ = os.Setenv("PROJECT_ID", "")
+			_ = os.Setenv("HOST", "")
 		})
 
 		It("Should Pass with both values populated", func() {
 			_ = os.Setenv("PORT", "8080")
-			_ = os.Setenv("PROJECT_ID", "happy")
-			port, projectID, err := config.GetEnvironmentVariables()
+			_ = os.Setenv("HOST", "happy")
+			port, host, err := config.GetEnvironmentVariables()
 
 			Expect(port).To(Equal("8080"))
-			Expect(projectID).To(Equal("happy"))
+			Expect(host).To(Equal("happy"))
 			Expect(err).ToNot(HaveOccurred())
 		})
 
@@ -32,7 +32,7 @@ var _ = Describe("Config", func() {
 		})
 
 		It("Should Fail with Project_id value populated", func() {
-			_ = os.Setenv("PROJECT_ID", "happy")
+			_ = os.Setenv("HOST", "happy")
 			_, _, err := config.GetEnvironmentVariables()
 
 			Expect(err).To(HaveOccurred())
